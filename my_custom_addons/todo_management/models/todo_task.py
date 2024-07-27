@@ -1,7 +1,7 @@
 from odoo import fields, models, api
 
 
-class TodoTask(models.Models):
+class TodoTask(models.Model):
     _name = 'todo.task'
 
     task_name = fields.Char()
