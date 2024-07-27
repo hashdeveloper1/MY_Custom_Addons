@@ -2,35 +2,43 @@
     <record id="todo_task_view_tree" model="ir.ui.view">
         <field name="name">todo.task.tree</field>
         <field name="model">todo.task</field>
-        <field name="arch" type="xml"/>
-        <tree>
-
-        </tree>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="task_name"/>
+            </tree>
+        </field>
     </record>
 
     <record id="todo_task_view_form" model="ir.ui.view">
         <field name="name">todo.task.form</field>
         <field name="model">todo.task</field>
-        <field name="arch" type="xml"/>
-        <form>
-
-        </form>
+        <field name="arch" type="xml" >
+            <form>
+                <field name="task_name"/>
+            </form>
+        </field>
     </record>
 
-    <record id="todo_task_view_search" model="ir.ui.view">
-        <field name="name">todo.task.search</field>
-        <field name="model">todo.task</field>
-        <field name="arch" type="xml"/>
-        <search>
+<!--    <record id="todo_task_view_search" model="ir.ui.view">-->
+<!--        <field name="name">todo.task.search</field>-->
+<!--        <field name="model">todo.task</field>-->
+<!--        <field name="arch" type="xml"/>-->
+<!--        <search>-->
 
-        </search>
-    </record>
+<!--        </search>-->
+<!--    </record>-->
 
 
     <record id="all_tasks_action" model="ir.actions.act_window">
         <field name="name">All Tasks</field>
         <field name="res_model">todo.task</field>
-        <field name="view_mode">tree,form,search</field>
+        <field name="view_mode">tree,form</field>
     </record>
+    <menuitem
+           id = "all_tasks_item"
+           name = "All Tasks"
+           parent = "todo_menu"
+           action = "all_tasks_action"
+    />
 
 </odoo>

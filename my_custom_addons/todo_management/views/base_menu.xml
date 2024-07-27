@@ -9,10 +9,4 @@
             name = "To-Do"
             parent = "todo_task_root_menu"
     />
-    <menuitem
-           id = "all_tasks_item"
-           name = "All Tasks"
-           parent = "todo_menu"
-           action = "all_tasks_action"
-    />
 </odoo>
