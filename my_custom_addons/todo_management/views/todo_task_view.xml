@@ -4,7 +4,11 @@
         <field name="model">todo.task</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="task_name"/>
+                <field name="name"/>
+                <field name="assign_to_id"/>
+                <field name="due_date"/>
+                <field name="description"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -14,7 +18,26 @@
         <field name="model">todo.task</field>
         <field name="arch" type="xml" >
             <form>
-                <field name="task_name"/>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="new,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                          <label for="name"/>
+                          <h1>
+                              <field name="name"/>
+                          </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="assign_to_id"/>
+                            <field name="due_date"/>
+                        </group>
+                    </group>
+                    <group>
+                         <field name="description"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
