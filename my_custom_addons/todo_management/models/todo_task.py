@@ -8,9 +8,9 @@ class TodoTask(models.Model):
     assign_to_id = fields.Many2one('res.partner')
     due_date = fields.Date()
     state = fields.Selection([
-        ('', ''),
-        ('', ''),
-        ('', '')],
-        default=''
+        ('new', 'New'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed')],
+        default='new'
     )
     description = fields.Text()

@@ -5,7 +5,7 @@ class Debtor(models.Model):
     _name = "debtor"
 
     # name = fields.Char(string="Debtor", required=True)
-    name = fields.Many2one('hr.employee', string="Debtor", required=True)
+    name = fields.Many2one('res.partner', string="Debtor", required=True)
     loan_ids = fields.One2many('loan', 'debtor', readonly=1, string="Loans")
     # job_position = fields.Many2one(related="name.job_id")
     # department = fields.Many2one(related="name.department_id")
@@ -30,6 +30,9 @@ class Debtor(models.Model):
     exempted_values = fields.Integer(string="Exempted Values", compute="_get_exempted_values")
     all_rest_values = fields.Integer(string="Rest Values", compute="_get_all_rest_values")
     notes = fields.Char(string="Notes")
+    _sql_constraints = [
+        ('unique_name', 'unique("name")', 'This Debtor Name Is Exist!')
+    ]
     @api.depends('loan_ids')
     def _get_all_loan_values(self):
         for rec in self:
