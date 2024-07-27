@@ -1,0 +1,24 @@
+<odoo>
+    <menuitem
+       id = "good_loans_root_menu"
+       name = "Good Loans"
+       web_icon="app_tow_v2,static/description/icon.png"
+    />
+    <menuitem
+       id = "loans_menu"
+       name = "Loans"
+       parent = "good_loans_root_menu"
+       action = "loan_action"
+    />
+    <menuitem
+       id = "debtors_menu"
+       name = "Debtors"
+       parent = "good_loans_root_menu"
+       action = "debtor_action"
+    />
+    <menuitem
+       id = "configration_menu"
+       name = "Configration"
+       parent = "good_loans_root_menu"
+    />
+</odoo>

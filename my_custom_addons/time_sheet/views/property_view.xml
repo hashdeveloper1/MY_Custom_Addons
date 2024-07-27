@@ -1,0 +1,79 @@
+<odoo>
+
+    <record id="property_view_tree" model="ir.ui.view">
+         <field name="name">Employees</field>
+         <field name="model">property2</field>
+         <field name="arch" type="xml">
+           <tree>
+               <field name="name"/>
+               <field name="date_availability" string="Month Start"/>
+               <field name="number_month"/>
+           </tree>
+         </field>
+    </record>
+
+    <record id="property_view_form" model="ir.ui.view">
+         <field name="name">Time sheet Form</field>
+         <field name="model">property2</field>
+         <field name="arch" type="xml">
+           <form>
+              <sheet>
+                   <group>
+                      <group >
+                          <field name="name"/>
+                          <field name="date_availability" string="Month Start" required="1"/>
+                      </group>
+                       <group>
+                           <field name="number_month"/>
+                          <field name="total_worked_hours"/>
+                       </group>
+                  </group>
+                  <notebook>
+                        <page string="Work Days">
+                            <field name="pro_line_ids"  widget="section_and_note_one2many">
+                                <tree editable="bottom">
+                                    <field name="date" />
+                                    <field name="is_attend" />
+                                    <field name="day_name" />
+                                    <field name="time_in" />
+                                    <field name="time_out" />
+                                    <field name="shift_hours" />
+                                    <field name="worked_hours" />
+                                </tree>
+                             <form>
+                                <group>
+                                    <group>
+                                        <field name="date" />
+                                        <field name="is_attend" />
+                                        <field name="day_name" />
+                                    </group>
+                                    <group>
+                                        <field name="time_in" />
+                                        <field name="time_out" />
+                                        <field name="shift_hours" />
+                                        <field name="worked_hours" />
+                                    </group>
+                                </group>
+                             </form>
+                            </field>
+                        </page>
+                    </notebook>
+              </sheet>
+           </form>
+         </field>
+    </record>
+
+
+
+    <record id="property_action" model="ir.actions.act_window">
+         <field name="name">Time Sheet</field>
+         <field name="res_model">property2</field>
+         <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+       id = "property_menu_item"
+       name = "Employees Time Sheet"
+       parent = "properties_menu"
+       action = "property_action"
+    />
+</odoo>

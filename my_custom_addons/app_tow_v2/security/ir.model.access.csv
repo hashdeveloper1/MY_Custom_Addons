@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_loan,access_loan,model_loan,,1,1,1,1
+access_debtor,access_debtor,model_debtor,,1,1,1,1
+access_loan_lines,access_loan_lines,model_loan_lines,,1,1,1,1
+access_exemption,access_exemption,model_exemption,,1,1,1,1

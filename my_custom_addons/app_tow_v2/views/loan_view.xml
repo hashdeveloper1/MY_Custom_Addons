@@ -1,0 +1,134 @@
+<odoo>
+    <record id="view_loan_pivot" model="ir.ui.view">
+        <field name="name">loan.pivot</field>
+        <field name="model">loan</field>
+        <field name="arch" type="xml">
+            <pivot string="Loans" sample="1">
+                <field name="name" string="Loan" class="text-center" type="row"/>
+                <field name="debtor" string="Debtor" class="text-center" type="row"/>
+                <field name="loan_value" class="text-center" type="measure"/>
+                <field name="collections" class="text-center" type="measure"/>
+                <field name="paid_value" class="text-center" type="measure"/>
+                <field name="exemption_value" class="text-center" type="measure"/>
+                <field name="rest_value"  class="text-center" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="loan_view_tree" model="ir.ui.view">
+         <field name="name">loan.tree</field>
+         <field name="model">loan</field>
+         <field name="arch" type="xml">
+           <tree multi_edit="1"  edit="1" create="1" delete="1">
+               <field name="name" string="Loan" class="text-center"/>
+               <field name="debtor" string="Debtor" class="text-center"/>
+               <field name="tack_loan_date" class="text-center"/>
+               <field name="payment_start_date" class="text-center"/>
+               <!--                             decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')" decoration-success="payment_state in ('paid', 'reversed')"-->
+
+               <field name="loan_value" decoration-success="state" class="text-center"/>
+               <field name="collections" class="text-center"  decoration-success="state == 'done'"  decoration-warning="state == 'yet'" decoration-info="state == 'new'"/>
+               <field name="paid_value" class="text-center"/>
+               <field name="exemption_value" class="text-center"/>
+               <field name="rest_value" decoration-danger="state" class="text-center"/>
+               <field name="state" class="text-center" widget="badge" decoration-success="state == 'done'" decoration-info="state == 'new'" decoration-warning="state == 'yet'"/>
+               <field name="loan_lines_ids" optional="1" class="text-center"/>
+           </tree>
+         </field>
+    </record>
+
+    <record id="loan_view_form" model="ir.ui.view">
+         <field name="name">loan.form</field>
+         <field name="model">loan</field>
+         <field name="arch" type="xml">
+           <form>
+               <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible':[('state','not in',['new','yet'])]}"/>
+                    <!-- <button name="action_view_register_payment_wizard" string="Hi ALi" type="object"
+                            attrs="{'invisible':[('state','in',['draft','done'])]}" class="oe_highlight"/> -->
+                    <field name="state" widget="statusbar" statusbar_visible="new,yet,done"/>
+               </header>
+              <sheet>
+                  <div class="oe_title">
+                      <h1>
+                          <field name="name"/>
+                      </h1>
+                  </div>
+                  <group>
+                      <group>
+                           <field name="debtor"/>
+                           <field name="loan_value" decoration-success="state"/>
+                           <field name="tack_loan_date" />
+                           <field name="payment_start_date"/>
+                           <field name="state" widget="badge" decoration-success="state == 'done'" decoration-info="state == 'new'"  decoration-warning="state == 'yet'"/>
+                      </group>
+                      <group>
+                           <field name="collections"  decoration-success="state == 'done'"  decoration-warning="state == 'yet'" decoration-info="state == 'new'"  />
+                           <field name="paid_value"/>
+                           <field name="exemption_value"/>
+                           <field name="rest_value"  decoration-danger="state"/>
+                      </group>
+                  </group>
+                  <group>
+                      <field name="notes"/>
+                  </group>
+                  <notebook >
+                    <page string="Payments" >
+                        <field name="loan_lines_ids"  widget="section_and_note_one2many"  attrs="{'readonly':[('state','in',['done'])]}">
+                            <tree editable="bottom">
+                                <field name="paid_date"/>
+                                <field name="paid_value"/>
+                                <field name="rest_value"/>
+                            </tree>
+                        <form>
+                            <group>
+                                <group>
+                                   <field name="paid_date" readonly='1' />
+                                   <field name="paid_value" readonly="1"/>
+                                   <field name="rest_value" readonly="1"/>
+                                </group>
+                            </group>
+                         </form>
+
+                        </field>
+                    </page>
+                    <page string="Exemptions" >
+                        <field name="exemption_ids"  widget="section_and_note_one2many"  attrs="{'readonly':[('state','in',['done'])]}">
+                            <tree editable="bottom">
+                                <field name="exemption_date" style="width: 30 %%"/>
+                                <field name="exemption_value" style="width: 30 %%"/>
+                                <field name="rest_value"/>
+                                <field name="notes"  widget="product_text"/>
+                            </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="exemption_date" readonly='1' />
+                                    <field name="exemption_value" readonly="1"/>
+                                    <field name="rest_value"/>
+                                    <field name="notes" readonly="1"/>
+                                </group>
+                            </group>
+                         </form>
+
+                        </field>
+                    </page>
+                </notebook>
+              </sheet>
+           </form>
+         </field>
+    </record>
+
+    <record id="loan_action" model="ir.actions.act_window">
+         <field name="name">Loan</field>
+         <field name="res_model">loan</field>
+         <field name="view_mode">tree,form,pivot</field>
+    </record>
+<!--    <menuitem-->
+<!--       id = "loan_menu_item"-->
+<!--       name = "Loans"-->
+<!--       parent = "loans_menu"-->
+<!--       action = "loan_action"-->
+<!--    />-->
+
+
+</odoo>

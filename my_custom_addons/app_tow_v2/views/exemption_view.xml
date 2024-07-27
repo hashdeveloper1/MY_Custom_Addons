@@ -1,0 +1,61 @@
+<odoo>
+
+    <record id="exemption_view_tree" model="ir.ui.view">
+         <field name="name">exemption.tree</field>
+         <field name="model">exemption</field>
+         <field name="arch" type="xml">
+           <tree create="0" edit="0" delete="0" >
+               <field name="name" string="Ref"/>
+               <field name="loan_id" string="Loan"/>
+               <field name="debtor" string="Debtor"/>
+               <field name="exemption_date"/>
+               <field name="exemption_value"/>
+               <field name="rest_value"/>
+           </tree>
+         </field>
+    </record>
+
+    <record id="exemption_view_form" model="ir.ui.view" >
+         <field name="name">exemption.form</field>
+         <field name="model">exemption</field>
+         <field name="arch" type="xml">
+           <form create="0" edit="0" delete="0" >
+               <header>
+                    <field name="state" widget="statusbar" statusbar_visible="new,yet,done"/>
+               </header>
+              <sheet>
+                      <div class="oe_title">
+                          <h1>
+                              <field name="name"/>
+                          </h1>
+                      </div>
+                  <group>
+                      <group>
+                          <field name="loan_id" string="Loan"/>
+                          <field name="debtor" string="Debtor"/>
+                          <field name="state" widget="badge" decoration-success="state == 'done'" decoration-info="state == 'new'" decoration-warning="state == 'yet'"/>
+
+                      </group>
+                      <group>
+                          <field name="exemption_date"/>
+                          <field name="exemption_value"/>
+                          <field name="rest_value"/>
+                      </group>
+                  </group>
+              </sheet>
+           </form>
+         </field>
+    </record>
+
+    <record id="exemption_action" model="ir.actions.act_window">
+         <field name="name">Exemptions</field>
+         <field name="res_model">exemption</field>
+         <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+       id = "exemptions_menu_item"
+       name = "Exemptions"
+       parent = "configration_menu"
+       action = "exemption_action"
+    />
+</odoo>

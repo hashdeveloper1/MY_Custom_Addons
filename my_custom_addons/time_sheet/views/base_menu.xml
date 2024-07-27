@@ -1,0 +1,14 @@
+<odoo>
+    <menuitem
+       id = "time_sheet_root_menu"
+       name = "Time Sheets"
+       web_icon="time_sheet,static/description/time-sheet.png"
+    />
+
+    <menuitem
+       id = "properties_menu"
+       name = "Employees"
+       parent = "time_sheet_root_menu"
+    />
+
+</odoo>
