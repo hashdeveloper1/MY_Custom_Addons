@@ -19,7 +19,8 @@ class Exemption(models.Model):
 
     def _get_name(self):
         for rec in self:
-            rec.name = "Exemption/" + str('0' * (5 - len(str(rec.id)))) + str(rec.id)
+            rec.name = "Exemption/" + str(rec.id).zfill(5)
+            # rec.name = "Exemption/" + str('0' * (5 - len(str(rec.id)))) + str(rec.id)
 
     @api.depends('loan_id')
     def _get_rest_value(self):

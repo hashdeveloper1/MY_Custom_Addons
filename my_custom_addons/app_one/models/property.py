@@ -32,8 +32,10 @@ class Property(models.Model):
     state = fields.Selection([
             ('draft', 'Draft'),
             ('pending', 'Pending'),
-            ('done', 'Done')
+            ('done', 'Done'),
+            ('closed', 'Closed'),
         ], default='draft')
+    active = fields.Boolean(default=True)
 
     owner_id = fields.Many2one('owner')
     tag_ids = fields.Many2many('tag')
@@ -57,6 +59,10 @@ class Property(models.Model):
     def action_done(self):
         for rec in self:
             rec.state = 'done'
+
+    def action_closed(self):
+        for rec in self:
+            rec.state = 'closed'
 
     @api.depends('expected_price', 'selling_price', 'owner_id.phone')
     def _compute_diff(self):

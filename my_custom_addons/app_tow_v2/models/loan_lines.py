@@ -18,7 +18,8 @@ class LoanLines(models.Model):
 
     def _get_name(self):
         for rec in self:
-            rec.name = "COLL/" + str('0' * (5 - len(str(rec.id)))) + str(rec.id)
+            rec.name = "COLL/" + str(rec.id).zfill(5)
+            # rec.name = "COLL/" + str('0' * (5 - len(str(rec.id)))) + str(rec.id)
 
     @api.depends('paid_value')
     def _compute_rest_value(self):

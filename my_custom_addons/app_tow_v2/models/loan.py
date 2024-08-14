@@ -8,7 +8,7 @@ import time
 class Loan(models.Model):
     _name = "loan"
 
-    name = fields.Char(compute="_get_name", readonly=1, store=1)
+    name = fields.Char(compute="_get_name", readonly=1)
     debtor = fields.Many2one('debtor', required=True, string="Debtor", states={'done': [('readonly', True)], 'yet': [('readonly', True)]})
     loan_value = fields.Integer(required=True, string="Value", states={'done': [('readonly', True)], 'yet': [('readonly', True)]})
     tack_loan_date = fields.Date(required=True, default=fields.Datetime.now, string="Tacking Date", states={'done': [('readonly', True)], 'yet': [('readonly', True)]})
@@ -28,7 +28,7 @@ class Loan(models.Model):
 
     def _get_name(self):
         for rec in self:
-            rec.name = "LO/" + str('0' * (5 - len(str(rec.id)))) + str(rec.id)
+            rec.name = "LO/" + str(str(rec.id).zfill(5))
 
     @api.depends('loan_lines_ids', 'exemption_ids', 'loan_value', 'rest_value', 'debtor', 'state')
     def _get_collections(self):
