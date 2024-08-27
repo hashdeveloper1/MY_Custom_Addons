@@ -8,6 +8,7 @@
         'security/ir.model.access.csv',
         'views/base_menu.xml',
         'views/todo_task_view.xml',
+        'views/todo_project_view.xml',
     ],
     'application': True,
 }
